@@ -48,7 +48,15 @@ can be shared simply by giving someone the id.
 A jlinx host is an always up peer in the peer-to-peer network.
 
 
+the jlinx-host can be run as Daemon or a service you can charge for. 
+its a general data strore & cache, event bus and api
+it costs money to run and you can charge for running your own api on top of these
+cloud flare should buy us lol
+we should run free ones until a partner's traffic becomes expensive and we charge
+or charge to help then run their own
 
+
+the jlinx host could also offer an array of key recovery options
 
 ## JLINX peer-to-peer networks
 
@@ -57,4 +65,88 @@ JLINX Node's can share Private Microledgers over a both public and private peer-
 ## First Implementation
 
 Our first implementation of JLINX is in [JavaScript and NodeJS](./nodejs)
+
+
+
+
+
+
+
+--- old notes ---
+
+# Jlinx
+
+Self Sovereign Identity and Data 
+
+## Urls
+
+parts: `jlinx:#{publicKey}`
+
+example: `jlinx:XR1uqOPeizww9JySKtvk9vVsvTpyg-v4OSmi5P6zDg0`
+
+
+### Examples
+
+```
+did = 'did:jlinx:wViFSkwmscps0EtnJ2VtUxvVSlt-s_lUFC1bh2byHbU'
+didAsJlinxUrl = 'jlinx:wViFSkwmscps0EtnJ2VtUxvVSlt-s_lUFC1bh2byHbU'
+```
+
+## Documents
+
+jlinx urls can point to
+- event stream
+- key value store
+- hyperdrive (full versioned filesystem)
+  - jlinx:nlyBJZoG1ZUx4QX9pWSIYqfx-NNdkcC3A_50J0E7J4g#images/frog.jpeg
+
+
+## Bi-Directional Communication
+
+mvp: I give you an id for an event stream I control and you give me one back
+
+some signing process should be used to ensure actors are sharing a stream they author
+
+basic membership works this way
+
+
+### Facts
+
+- you can make more then one did from the same pair of signing keys
+- the did is locked to the hypercore, not your signing keys
+
+
+
+
+
+
+
+## Related Projects
+
+- https://ssbc.github.io/scuttlebutt-protocol-guide/
+- https://danubetech.com/
+- https://gataca.io/products/connect/
+- https://www.npmjs.com/package/js-did-hyper
+- https://www.npmjs.com/package/hypns (hypercore + IPNS (IPFS's NAME SYSTEM))
+- https://dat-ecosystem.org/
+- https://atek.cloud/blog/hello-world
+- SSI: https://jolocom.io/products/
+- https://whitepaper.neighbourhoods.network/white-paper-v.1/neighbourhoods-a-web-3.0-framework/distributed-social-sense-making
+- https://gun.eco/docs/Todo-Dapp
+- https://orbitdb.org (like us but on IPFS)
+- https://testile.io (IPFS, Libp2p)
+
+## TODO
+
+- implement support for did versions
+  - RE: did document metadata
+- get added to universal resolvers
+  - https://dev.uniresolver.io/
+  - https://github.com/decentralized-identity/universal-resolver/blob/main/docs/driver-development.md
+- look into Lamport Clocks and Vector Clocks
+
+## support for did versions
+
+did:xxx:12345?version=16
+
 
