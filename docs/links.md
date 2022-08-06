@@ -30,6 +30,17 @@ sidebar_position: 98
 - https://www.w3.org/TR/did-core/#dfn-did-subjects
 - https://www.w3.org/TR/did-spec-registries/#representations
 
+## DID Resolver
+
+- https://www.npmjs.com/package/did-resolver
+  - AKA https://github.com/decentralized-identity/did-resolver
+  - has plugins. we could make one
+- https://github.com/search?q=key-did-resolver
+- https://github.com/transmute-industries/did-key.js
+- https://github.com/digitalbazaar/crypto-ld
+- https://github.com/decentralized-identity/ethr-did-resolver
+
+
 ## DID Document
 
 ## json-ld
@@ -114,9 +125,29 @@ sidebar_position: 98
 ## DAT ?? (wahts a DAT?)
 
 - https://github.com/pfrazee/dat-gateway
-
+- https://datdot.org/#doc
+- https://www.youtube.com/channel/UCBW3UZmNnVgT-jR3TQz_l-Q/videos
 
 ## Desktop applications
 
 - electron
 - https://docs.expo.dev/workflow/expo-cli/
+- https://tauri.app
+
+
+## Self-hosting personal data
+
+- https://ubos.net/about/
+
+## Distributed Social Networks
+
+- https://www.farcaster.xyz/docs/intro
+
+## Distributed Apps
+
+- [that hypercore video conferencing app]
+- https://cabal.chat/
+
+
+
+
