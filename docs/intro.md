@@ -121,20 +121,6 @@ basic membership works this way
 
 
 
-## Related Projects
-
-- https://ssbc.github.io/scuttlebutt-protocol-guide/
-- https://danubetech.com/
-- https://gataca.io/products/connect/
-- https://www.npmjs.com/package/js-did-hyper
-- https://www.npmjs.com/package/hypns (hypercore + IPNS (IPFS's NAME SYSTEM))
-- https://dat-ecosystem.org/
-- https://atek.cloud/blog/hello-world
-- SSI: https://jolocom.io/products/
-- https://whitepaper.neighbourhoods.network/white-paper-v.1/neighbourhoods-a-web-3.0-framework/distributed-social-sense-making
-- https://gun.eco/docs/Todo-Dapp
-- https://orbitdb.org (like us but on IPFS)
-- https://testile.io (IPFS, Libp2p)
 
 ## TODO
 

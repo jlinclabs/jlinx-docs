@@ -23,8 +23,20 @@ sidebar_position: 99
 
 ## ZKP - Zero Knowledger Proof
 
+## RDF - Resource Description Framework
+
+- https://www.w3.org/RDF/
+
+### RDF ontology
+
+- The term "ontology" can be defined as an explicit specification of conceptualization
+
 
 ## Verifiable Credential
+
+### Semanitcally Ambiguous Verifiable Credential
+
+### Semanitcally Unambiguous Verifiable Credential
 
 
 ## Verifiable Credential Presentaiton 
@@ -35,7 +47,10 @@ sidebar_position: 99
 - https://crdt.tech/implementations
 - https://automerge.org/docs/hello/
 
+## JSON-LD JSON Linked Documents
 
+JSON-LD can only be performed on a projection/view
+we cannot expand on the event level
 
 ## SCHEMAS
 
@@ -45,3 +60,4 @@ sidebar_position: 99
 ## event store + materialized views
 
 - https://github.com/kappa-db/kappa-core
+
