@@ -10,6 +10,12 @@ Jlinx Documents
 All documents are hosted by one Jlinx-node. All other nodes can replicate a 
 read-only copy if they know the document id
 
+## Javascript Class Structure
+
+
+### RemoteDocument
+### Ledger
+### EventMachine
 
 # Networking
 

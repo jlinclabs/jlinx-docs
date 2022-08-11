@@ -1,5 +1,8 @@
 # Micro-Ledgers
 
+
+
+
 ## Events 
 
 - all events must be signed
@@ -20,17 +23,11 @@
 
 ```json
 {
-  // "event" (required)
-  "event": "opened document",
-  // "document type" (required)
-  "document type": "didDocument",
-  // "cryptographic signing key" (required)
-  "cryptographic signing key": "unyxMCwpF0QQqF5M7KvIY8FTWJGQCBTaQF9cFnUgc0se",
-  // "hyperswarm id" (optional) to get the latest more agressively 
-  "hyperswarm id": "<publicKey:hex>", 
-  // "host url" (optional) to get the latest more agressively 
-  "host url": "https://testnet.jlinx.io/jlinx:uF5nyxMCwpF0QQqM7KvIY8FTWF9cFnUgc0seJGQCBTaQ",
-  // required
+  "Event": "opened document",
+  "Document Type": "didDocument",
+  "Cryptographic Signing Key": "unyxMCwpF0QQqF5M7KvIY8FTWJGQCBTaQF9cFnUgc0se",
+  "Hyperswarm ID": "<publicKey:hex>", 
+  "Host URL": "https://testnet.jlinx.io/jlinx:uF5nyxMCwpF0QQqM7KvIY8FTWF9cFnUgc0seJGQCBTaQ",
   "signature": "…",
 }
 ```
@@ -96,3 +93,50 @@
     - this would require the host look for these events and keep track of changes to the signing key 
     - yuck but doable
     - wait isnt this ownerDid now? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Merging streams
+
+- everything is a MicroLedger class or subclass
+- it has a main stream which is its id
+- if its moved we add another 
+- it can add other MicroLedgers
+
+#### Ledger class
+
+- only deal with one hypercore (unless its been moved)
+  - WE NEED TO ALWAYS DEAL WITH MORE THAN ONE CORE SO WE CAN MOVE CORES
+
+- apply handlers serialization and signing
+- define events?
+
+`Ledger(Document || RemoteDocument)`
+
+
+#### MultiLedger class
+
+- starts with one core as a Leger
+- tracks and reads from multiple input Ledgers
+- has one localInput Ledger (where we write to)
+
+- we can know which ledger is yours by which is writable
+  - IF BIG CHANGE: we'd have to give each app user their own vault
+
+```js
+
+const chatRoom = jlinx.get(chatRoomId)
+chatRoom instanceof MicroLedger // true
+
+```
+

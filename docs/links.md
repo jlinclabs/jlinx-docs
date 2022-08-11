@@ -78,6 +78,8 @@ sidebar_position: 98
 
 - https://schema.org/docs/schemas.html
 - https://schema.org/Person
+- https://schema.org/MusicPlaylist
+- https://schema.org/Trip
 
 
 ## Materialized Views
@@ -99,6 +101,9 @@ sidebar_position: 98
 
 ## Related Projects
 
+- Dock WEB3 ID - https://blog.dock.io/web3-identity/
+- https://orbitdb.org (like us but on IPFS)
+- https://ctzn.network/ (DEAD project I believe)
 - https://ssbc.github.io/scuttlebutt-protocol-guide/
 - https://danubetech.com/
 - https://gataca.io/products/connect/
@@ -109,11 +114,13 @@ sidebar_position: 98
 - SSI: https://jolocom.io/products/
 - https://whitepaper.neighbourhoods.network/white-paper-v.1/neighbourhoods-a-web-3.0-framework/distributed-social-sense-making
 - https://gun.eco/docs/Todo-Dapp
-- https://orbitdb.org (like us but on IPFS)
 - https://testile.io (IPFS, Libp2p)
 - https://github.com/cabal-club/cabals
 - https://github.com/3idprotocol/introduction
 - https://github.com/OzymandiasTheGreat/screamingvoid
+- https://activitypub.rocks/
+- Kleros - decentralized third party arbitration, on-chain jury
+- https://accordproject.org/
 
 ## hypercore + hyperswarm
 
