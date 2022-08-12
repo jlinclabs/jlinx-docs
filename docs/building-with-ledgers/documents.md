@@ -14,7 +14,11 @@ A JLINX Document link is the same as a Micro Ledger link. Example:
 
 to link to a specific version of a document you can append a `:{index}`. Example: 
 
-`jlinx:u9qha-mQ2eMHZaxZOyEY-o0cXqCwTaR_zLZtfsUsfDAY:1337`
+`jlinx:u9qha-mQ2eMHZaxZOyEY-o0cXqCwTaR_zLZtfsUsfDAY:42`
+
+The first entry into a document is the header
+
+`jlinx:u9qha-mQ2eMHZaxZOyEY-o0cXqCwTaR_zLZtfsUsfDAY:0`
 
 
 The value of a document is calculated using a [projection](/docs/building-with-ledgers/projections)
