@@ -29,7 +29,17 @@ Any two parties can create and exchange microledgers to setup realtime bi-direct
 
 By creating a Micro Ledger using a shared [Doc Type](/docs/doc-types) you can publish mutable (append-only) docments to the open web.
 
-### Sharing Contacts
+
+<LinkImage src="/img/alice-and-bob-blogging.svg"/>
+
+
+### No Single Ledger
+
+<LinkImage src="/img/alice-and-bob-blogging-in-parallel.svg"/>
+
+
+
+<!-- ### Sharing Contacts -->
 
 
 
