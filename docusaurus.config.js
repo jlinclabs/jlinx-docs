@@ -43,14 +43,14 @@ async function createConfig(){
             // Please change this to your repo.
             // Remove this to remove the "edit this page" links.
             editUrl:
-              'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+              'https://github.com/jlinclabs/jlinx-docs/tree/main/packages/create-docusaurus/templates/shared/',
           },
           // blog: {
           //   showReadingTime: true,
           //   // Please change this to your repo.
           //   // Remove this to remove the "edit this page" links.
           //   editUrl:
-          //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          //     'https://github.com/jlinclabs/jlinx-docs/tree/main/packages/create-docusaurus/templates/shared/',
           // },
           theme: {
             customCss: require.resolve('./src/css/custom.css'),

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 title: Building an App
 description: Building an App with JLINX
 ---
