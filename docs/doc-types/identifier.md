@@ -1,14 +1,14 @@
 ---
 sidebar_position: 2
-title: Identity
-description: Identity
+title: Identifier (DID)
+description: Identifier (DID)
 ---
 
-# Identity
+# Identifier  (DID)
 
-An Identity is a [Micro Ledger](/docs/micro-ledgers) where the owner keys are used as a [DID](https://www.w3.org/TR/did-core/).
+An Identifier is a [Micro Ledger](/docs/micro-ledgers) where the owner keys are used as a [DID](https://www.w3.org/TR/did-core/).
 
-A JLINX Micro Ledger with the ID of 
+A JLINX Micro Ledger with the ID of
 
 `jlinx:ufVFkjvhOxnMyvwJtrEpiQTdBkhGvAx_QkbELE1Oxvhg`
 
@@ -29,7 +29,7 @@ console.log(identifier.id) // jlinx:ufVFkjvhOxnMyvwJtrEpiQTdBkhGvAx_QkbELE1Oxvhg
 console.log(identifier.did) // did:jlinx:ufVFkjvhOxnMyvwJtrEpiQTdBkhGvAx_QkbELE1Oxvhg
 
 // https://www.w3.org/TR/did-core/#dfn-service
-await identifier.addServer({ 
+await identifier.addService({
   id: '#profile',
   type: 'JlinxProfile',
   serviceEndpoint: 'jlinx:ukhGvAx_VFkjvhOxnMyvwJtrEpiQTdB1OxvhgQkbELE',

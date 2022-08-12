@@ -16,20 +16,31 @@ Micro Ledgers are:
 - A host keypair (ED25519)
 - An owner keypair (ED25519)
 - Append only
-- Each block is signed by the keypair
-- The public key is the id
+- Each block is signed by both the keypairs
+- The host public key is the id
 - Shared over BitTorrent like DHT
 
 Some additional features:
 
 - Sparse replication. Only download the data you are interested in.
-- Realtime. Get the latest updates to the log fast and securely.
+- Realtime. Get the latest updates to the ledger fast and securely.
 - Performant. Uses a simple flat file structure to maximize I/O performance.
 - Secure. Uses signed merkle trees to verify log integrity in real time.
 - Browser support. Simply pick a storage provider (like random-access-memory) that works in the browser
 
-## Multiple Key Pairs
 
+## Privacy
+
+Unlike blockchains Micro Ledgers can be "forgotten".
+
+Micro Ledgers only live as long as somebody is interested in that data.
+
+Ledgers can hold public, published data that lives as long as somebody cares about it.
+
+Ledgers are only visible to parties with the IDs (public keys) of them.
+
+
+## Multiple Key Pairs
 
 Micro Ledgers have two keypairs `Host Keys` and `Owner Keys`. The host keys are heald by the host and the owner keys are heald by the owner.
 

@@ -61,3 +61,5 @@ we cannot expand on the event level
 
 - https://github.com/kappa-db/kappa-core
 
+
+## DAG - Directed Acyclic Graph
