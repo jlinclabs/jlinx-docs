@@ -66,7 +66,8 @@ async function createConfig(){
           title: 'Jlinx',
           logo: {
             alt: 'Jlinx Logo',
-            src: 'img/logo.svg',
+            // src: 'img/logo.svg',
+            src: 'img/jlinx-looking.svg',
           },
           items: [
             {

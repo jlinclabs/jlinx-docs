@@ -10,6 +10,20 @@
   overflow: hidden;
 }
 
+.stage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.stageRight {
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 @media screen and (max-width: 996px) {
   .heroBanner {
     padding: 2rem;
@@ -20,4 +34,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+
+.buttons > *:not(:last-child) {
+  margin-bottom: 10px
 }
