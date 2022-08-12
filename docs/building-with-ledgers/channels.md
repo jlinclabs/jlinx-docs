@@ -14,24 +14,55 @@ Because [Micro Ledgers](/docs/micro-ledgers) are single-author we can only send 
 
 I make a new micro ledger and share the address with you, you also make a new micro ledger and share the address with me. Now both parties can subscribe to and react to events from the other and view versa.
 
+```mermaid
+graph TD;
+    A-->B;
+    B-->A;
+```
+
+
 ## Multiparty Channels
-
-
-
 
 ```mermaid
 graph TD;
     A-->B;
     A-->C;
-    B-->D;
-    C-->D;
+    B-->A;
+    B-->C;
+    C-->A;
+    C-->B;
 ```
 
 
-import { Mermaid } from 'mdx-mermaid/Mermaid';
-<Mermaid chart={`
-	graph LR;
-		A-->B;
-		B-->C;
-		B-->D[plop lanflz eknlzeknfz];
-`}/>
+## Opening a channels
+
+```js
+
+const channel = {}
+// Create a micro ledger
+channel.emitLedger = await jlinx.create()
+
+// share the id with someone some-how (http maybe)
+console.log(`Share this ${channel.emitLedger.id}`)
+
+// their micro-ledger id someone
+channel.recvLedger = await jlinx.get('jlinx:fda0…')
+
+// read events
+channel.recvLedger.length
+for (const event in channel.recvLedger.events()){
+  console.log({ event })
+}
+
+// subscribe to events
+channel.recvLedger.on('event', event => {
+  console.log({ event })
+})
+
+// send an event
+await channel.emitLedger.append({ 
+  event: 'example-event',
+  plus: 'more',
+})
+
+```
