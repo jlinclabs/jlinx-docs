@@ -16,10 +16,9 @@ export default function Home() {
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className={clsx('container', styles.stage)}>
           <div className={styles.stageLeft}>
-            <img className="logo" src="img/jlinx-looking.svg"/>
+            <img className={styles.logo} src="img/jlinx-looking.svg"/>
           </div>
           <div className={styles.stageRight}>
-            {/* <p className="hero__subtitle">{siteConfig.tagline}</p> */}
             <h1 className="hero__title">JLINX</h1>
             <div className={styles.buttons}>
               <Link

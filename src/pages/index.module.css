@@ -40,3 +40,8 @@
 .buttons > *:not(:last-child) {
   margin-bottom: 10px
 }
+
+.logo {
+  height: 623px;
+  width: 313px;
+}
