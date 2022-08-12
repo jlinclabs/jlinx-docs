@@ -18,3 +18,9 @@ to link to a specific version of a document you can append a `:{index}`. Example
 
 
 The value of a document is calculated using a [projection](/docs//building-with-ledgers/projections)
+
+
+## Hosts
+
+All documents are hosted by one Jlinx-node. All other nodes can replicate a 
+read-only copy if they know the document id
