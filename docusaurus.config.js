@@ -44,10 +44,7 @@ async function createConfig(){
           docs: {
             remarkPlugins: [mdxMermaid],
             sidebarPath: require.resolve('./sidebars.js'),
-            // Please change this to your repo.
-            // Remove this to remove the "edit this page" links.
-            editUrl:
-              'https://github.com/jlinclabs/jlinx-docs/blob/master',
+            editUrl: 'https://github.com/jlinclabs/jlinx-docs/blob/master',
           },
           // blog: {
           //   showReadingTime: true,
