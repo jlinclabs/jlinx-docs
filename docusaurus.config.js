@@ -6,8 +6,12 @@ async function createConfig(){
   // @ts-check
   // Note: type annotations allow type checking and IDEs autocompletion
 
-  const lightCodeTheme = require('prism-react-renderer/themes/github');
-  const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+  const lightCodeTheme = require('prism-react-renderer/themes/github')
+  const darkCodeTheme = require('prism-react-renderer/themes/nightOwl')
+  // const darkCodeTheme = require('prism-react-renderer/themes/shadesOfPurple')
+  // const darkCodeTheme = require('prism-react-renderer/themes/dracula')
+  // const darkCodeTheme = require('prism-react-renderer/themes/vsDark')
+  // const darkCodeTheme = require('prism-react-renderer/themes/synthwave84')
 
   /** @type {import('@docusaurus/types').Config} */
   return {
@@ -62,6 +66,11 @@ async function createConfig(){
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
+        colorMode: {
+          defaultMode: 'dark',
+          disableSwitch: false,
+          respectPrefersColorScheme: true,
+        },
         navbar: {
           title: 'Jlinx',
           logo: {
@@ -134,6 +143,6 @@ async function createConfig(){
           darkTheme: darkCodeTheme,
         },
       }),
-  };
+  }
 }
 
