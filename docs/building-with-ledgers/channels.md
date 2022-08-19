@@ -12,7 +12,7 @@ Since [Micro Ledgers](/docs/micro-ledgers) are single-author we can only send da
 
 ## Pairwise Channel
 
-**Example:** I make a new micro ledger and share the address with you, you also make a new micro ledger and share the address with me. Now both parties can subscribe to and react to events from the other and view versa.
+**Example:** I make a new Micro Ledger and share the address with you, you also make a new Micro Ledger and share the address with me. Now both parties can subscribe to and react to events from the other and view versa.
 
 ```mermaid
 graph TD;
