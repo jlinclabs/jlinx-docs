@@ -21,13 +21,13 @@ sidebar_position: 99
 ## DID Document
 
 
-## ZKP - Zero Knowledger Proof
+## ZKP - Zero Knowledge Proof
 
 ## RDF - Resource Description Framework
 
 - https://www.w3.org/RDF/
 
-### RDF ontology
+### RDF Ontology
 
 - The term "ontology" can be defined as an explicit specification of conceptualization
 
@@ -39,7 +39,7 @@ sidebar_position: 99
 ### Semantically Unambiguous Verifiable Credential
 
 
-## Verifiable Credential Presentaiton 
+## Verifiable Credential Presentation 
 
 
 ## CRDT Conflict-Free Replicated Data Type
@@ -52,12 +52,12 @@ sidebar_position: 99
 JSON-LD can only be performed on a projection/view
 we cannot expand on the event level
 
-## SCHEMAS
+## Schemas
 
 - https://schema.org/docs/schemas.html
 
 
-## event store + materialized views
+## Event Store + Materialized Views
 
 - https://github.com/kappa-db/kappa-core
 
