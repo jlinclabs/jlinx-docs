@@ -6,7 +6,7 @@ description: Documents
 
 # Documents
 
-Documents are backed by [Micro Ledgers](/docs/micro-ledgers) so their effectively an opt-log for edits to whatever type of document you want to create.
+Documents are backed by [Micro Ledgers](/docs/micro-ledgers) so they're effectively an opt-log for edits to whichever type of document you want to create.
 
 A JLINX Document link is the same as a Micro Ledger link. Example: 
 
