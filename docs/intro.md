@@ -15,17 +15,17 @@ JLINX is an ecosystem of ledgers. Ledgers are created, shared, subscribed-to, an
 The goal of JLINX is to lay a foundation of verifiable, auditable, gas-fee free, data exchange that can be shared with as many or as few other parties as needed.
 
 
-## How JLINX works
+## How JLINX Works
 
 JLINX allows anyone to create and append to a virtually unlimited set of Micro Ledgers. Those Micro Ledgers can only be updated by you. You can share them as easily as you share a magnet link to a torrent you're seeding. You can also keep them private by not sharing or seeding them.
 
-### peer-to-peer communication
+### Peer-to-Peer Communication
 
-Any two parties can create and exchange microledgers to set up realtime bi-direction event streams.
+Any two parties can create and exchange Micro Ledgers to set up realtime bi-direction event streams.
 
 <LinkImage src="/img/alice-and-bob-solo.svg"/>
 
-### publishing
+### Publishing
 
 By creating a Micro Ledger using a shared [Doc Type](/docs/doc-types) you can publish mutable (append-only) documents to the open web.
 
