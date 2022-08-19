@@ -6,7 +6,7 @@ description: Documentation for JLINX Clients
 
 # JLINX Clients
 
-Processes that talk to [JLINX hosts](/docs/hosts) network are called **clients**. Clients can come and go and so are intended for applications on devices that regularly lose access to the internet or are shutdown.
+Processes that talk to [JLINX hosts](/docs/hosts) network are called **clients**. Clients can come and go, so they are intended for applications on devices that regularly lose access to the internet or are shutdown.
 
 
 ## Implementations
