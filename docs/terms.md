@@ -34,9 +34,9 @@ sidebar_position: 99
 
 ## Verifiable Credential
 
-### Semanitcally Ambiguous Verifiable Credential
+### Semantically Ambiguous Verifiable Credential
 
-### Semanitcally Unambiguous Verifiable Credential
+### Semantically Unambiguous Verifiable Credential
 
 
 ## Verifiable Credential Presentaiton 
