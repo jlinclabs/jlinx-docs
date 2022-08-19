@@ -8,7 +8,7 @@ description: Channels
 
 Channels use two or more [Micro Ledgers](/docs/micro-ledgers) to communicate. 
 
-Since [Micro Ledgers](/docs/micro-ledgers) are single-author we can only send data out by appending new events to the ledger. So there needs at least one stream to emit on and one other stream to listen to.
+Since [Micro Ledgers](/docs/micro-ledgers) are single-author we can only send data out by appending new events to the ledger. So there needs to be at least one stream to emit on and one other stream to listen to.
 
 ## Pairwise Channel
 
