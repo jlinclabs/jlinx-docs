@@ -21,7 +21,6 @@ sidebar_position: 98
 - https://github.com/w3c/did-core
 - https://www.w3.org/TR/did-spec-registries/
 - https://decentralized-id.com/web-standards/w3c/wg/did/decentralized-identifier/
-- https://json-schema.org/implementations.html
 - https://github.com/korzio/djv
 - https://www.w3.org/TR/did-core/#relative-did-urls
 - https://www.w3.org/TR/did-rubric/
@@ -43,9 +42,23 @@ sidebar_position: 98
 
 ## DID Document
 
-## json-ld
+## Schemas & Linked Data
 
+- https://blog.spruceid.com/introducing-treeldr-a-canopy-across-your-data-schemas/
+
+### json-ld
+
+- https://github.com/transmute-industries/verifiable-data/tree/main/packages/jsonld-schema
 - https://www.youtube.com/watch?v=-yUbMDft5O0
+
+## SCHEMAS
+
+- https://json-schema.org/implementations.html
+- https://schema.org/docs/schemas.html
+- https://schema.org/Person
+- https://schema.org/MusicPlaylist
+- https://schema.org/Trip
+
 
 ## ZKP - Zero Knowledger Proof
 
@@ -74,12 +87,6 @@ sidebar_position: 98
 - https://www.npmjs.com/package/random-access-file
 - https://www.npmjs.com/package/random-access-latency
 
-## SCHEMAS
-
-- https://schema.org/docs/schemas.html
-- https://schema.org/Person
-- https://schema.org/MusicPlaylist
-- https://schema.org/Trip
 
 
 ## Materialized Views
