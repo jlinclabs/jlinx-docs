@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 6
 title: Micro Ledgers
 description: Documentation for JLINX Micro Ledgers
 ---
