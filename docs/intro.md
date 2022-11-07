@@ -46,6 +46,8 @@ By creating a Micro Ledger using a shared [Doc Type](/docs/doc-types) you can pu
 
 ## Learn more
 
+- [Agents](/docs/agents)
+- [Federations](/docs/federations)
 - [Micro Ledgers](/docs/micro-ledgers)
 - [Hosts](/docs/hosts)
 - [Clients](/docs/clients)
