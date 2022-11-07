@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+set -x
+
+npm run build
+rsync -avz --delete ./build/ jlinc@docs.jlinx.io:/var/www/docs
