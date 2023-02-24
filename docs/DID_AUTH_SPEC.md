@@ -62,16 +62,130 @@ is out of scope.
 
 
 
-Using the familiar format of email address `${id}@${origin}` 
-(E.G. jared@jlinc.com) users can login
+```
+Alice visits app1.com
+Alice registers for new idenitity alice@app1.com
+Alice visits app2.com
+Alice authenticates with alice@app1.com
+app2 requests HTTP GET https://app1.com/.well-known/did.json (cachable)
+app2 requests HTTP GET https://app1.com/dids/alice/did.json (latest)
+(we could do a one-time-code here)
+Alice is redirected to https://app1 
+
+```
+
+
+## Email Identifiers
+
+`did:web` DIDs can be formatted as an email address 
+`${base64_encoded_public_key}@${origin}`
+or using a username alias `${username}@${origin}` (E.G. jared@jlinc.com) 
+
+Formats: 
+
+- `${base64_encoded_public_key}@${origin}`
+- `${username}@${origin}`
+
+
+## Authentication Methods
+
+- messaged a one-time-code
+- messaged a magic link
+- http redirect dance
+
+
+
+### TLS 
+
+Transport Layer Security is considered essential at all times. Using this 
+protocol over insecure connections is not recommended.
+
+
+### HTTP Redirections
+
+This specification makes extensive use of HTTP redirections, in which the 
+client or the authorization server directs the resource owner's user-agent 
+to another destination.  While the examples in this specification show the 
+use of the HTTP 302 status code, any other method available via the 
+user-agent to accomplish this redirection is allowed and is considered to be
+an implementation detail.
+
+
+
+### Notational Conventions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   specification are to be interpreted as described in [RFC2119].
+
+   This specification uses the Augmented Backus-Naur Form (ABNF)
+   notation of [RFC5234].  Additionally, the rule URI-reference is
+   included from "Uniform Resource Identifier (URI): Generic Syntax"
+   [RFC3986].
+
+   Certain security-related terms are to be understood in the sense
+   defined in [RFC4949].  These terms include, but are not limited to,
+   "attack", "authentication", "authorization", "certificate",
+   "confidentiality", "credential", "encryption", "identity", "sign",
+   "signature", "trust", "validate", and "verify".
+
+   Unless otherwise noted, all the protocol parameter names and values
+   are case sensitive.
+
+
+### Client Registration
+
+Unlike OAuth there is not client registration. Any http host that complies 
+with this specification should interoperate with any other. 
+
+
+
+## Protocol Endpoints
+
+Hosting DIDs request the host to respond to the following endpoints:
+
+- host did document endpoint
+- identity did document endpoint
+- authentication endpoint
+
+Any HTTP domain can host [did:web][did-web-spec] [identifiers][did-spec] by:
+
+
+### Host DID Document Endpoint
+
+Identifier hosts must respond to 
+
+GET `https://${origin}/.well-known/did.json` 
+
+with a valid DID Document.
+
+### Identity DID Document Endpoint
+
+Identifier hosts must respond to 
+
+GET `https://${origin}/dids/${id}/did.json` 
+
+with a valid DID Document. 
+
+### Authentication Endpoint
+
+Optional endpoint to support cross-domain authentication.
+
+POST `https://${origin}/dids/${id}/auth`
 
 
 
 
+## Identifiers
 
+## Credentials
 
+### Granting a Credential
 
+### Verifying a Credential
 
+Credentials are revokable so verifying applications should request updated 
+copies before granting access. 
 
 
 
