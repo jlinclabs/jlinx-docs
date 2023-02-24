@@ -63,15 +63,24 @@ is out of scope.
 
 ```
 Alice visits app1.com
-Alice registers for new idenitity alice@app1.com
+Alice registers a new identity alice@app1.com
 Alice visits app2.com
 Alice authenticates with alice@app1.com
 app2 requests HTTP GET https://app1.com/.well-known/did.json (cachable)
 app2 requests HTTP GET https://app1.com/dids/alice/did.json (latest)
+app2 requests HTTP GET https://app1.com/dids/alice/auth
+depending on the response from app1, app2 chooses a compatible 
+authenticaiton method
 (we could do a one-time-code here)
-Alice is redirected to https://app1 
-
+Alice is redirected to https://app1
 ```
+
+## Authentication Methods
+
+- messaged a one-time-code
+- messaged a magic link
+- http redirect dance
+
 
 
 ## Email Identifiers
@@ -84,13 +93,6 @@ Formats:
 
 - `${base64_encoded_public_key}@${origin}`
 - `${username}@${origin}`
-
-
-## Authentication Methods
-
-- messaged a one-time-code
-- messaged a magic link
-- http redirect dance
 
 
 
@@ -146,6 +148,7 @@ Hosting DIDs request the host to respond to the following endpoints:
 - host did document endpoint
 - identity did document endpoint
 - authentication endpoint
+- message endpoint
 
 Any HTTP domain can host [did:web][did-web-spec] [identifiers][did-spec] by:
 
@@ -171,6 +174,15 @@ with a valid DID Document.
 Optional endpoint to support cross-domain authentication.
 
 POST `https://${origin}/dids/${id}/auth`
+
+### Message Endpoint
+
+Optional endpoint to receive message for an identifier
+
+POST `https://${origin}/dids/${id}/inbox`
+
+
+post body must be a JWT signed by the client identity
 
 
 
