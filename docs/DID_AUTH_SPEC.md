@@ -143,31 +143,46 @@ with this specification should interoperate with any other.
 
 ## Protocol Endpoints
 
-Hosting DIDs request the host to respond to the following endpoints:
+Any HTTP domain can host [did:web][did-web-spec] [identifiers][did-spec].
+Hosting DIDs require the host to respond to the following endpoints:
 
 - host did document endpoint
 - identity did document endpoint
 - authentication endpoint
 - message endpoint
 
-Any HTTP domain can host [did:web][did-web-spec] [identifiers][did-spec] by:
-
 
 ### Host DID Document Endpoint
 
-Identifier hosts must respond to 
-
 GET `https://${origin}/.well-known/did.json` 
 
-with a valid DID Document.
+#### Request
+
+##### Params
+
+none
+
+#### Response 
+
+A valid DID Document including at least one signing keys pair.
+
+
 
 ### Identity DID Document Endpoint
 
-Identifier hosts must respond to 
-
 GET `https://${origin}/dids/${id}/did.json` 
 
-with a valid DID Document. 
+#### Request
+
+##### Params
+
+none
+
+#### Response 
+
+A valid DID Document including at least one signing keys pair.
+
+
 
 ### Authentication Endpoint
 
@@ -175,16 +190,39 @@ Optional endpoint to support cross-domain authentication.
 
 POST `https://${origin}/dids/${id}/auth`
 
+#### Request
+
+##### Params
+
+none
+
+#### Response 
+
+A valid DID Document including at least one signing keys pair.
+
+
+
 ### Message Endpoint
 
 Optional endpoint to receive message for an identifier
 
 POST `https://${origin}/dids/${id}/inbox`
 
+#### Request
 
-post body must be a JWT signed by the client identity
+##### Methods
 
+POST
 
+##### Params
+
+none
+
+##### Post Body
+
+#### Response 
+
+Any successful status code.
 
 
 ## Identifiers
