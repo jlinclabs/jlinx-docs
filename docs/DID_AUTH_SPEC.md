@@ -83,16 +83,45 @@ Alice is redirected to https://app1
 
 
 
-## Email Identifiers
+## Hosted Identifiers
 
-`did:web` DIDs can be formatted as an email address 
-`${base64_encoded_public_key}@${origin}`
-or using a username alias `${username}@${origin}` (E.G. jared@jlinc.com) 
+A hosted identifier is a [DID][did-spec] using the [did:web method]
+[did-web-spec] at a specific host domain. See the [did:web spec]
+[did-web-spec] for details on formatting and encoding.
 
-Formats: 
+A hosted identifier can be presented in several formats:
 
-- `${base64_encoded_public_key}@${origin}`
-- `${username}@${origin}`
+
+##### DID using public key
+
+`did:web:example.com:dids:z6MkhvoSQhPDNwotybwX9o2scoSvkx5Syem3GiM9FV8h5YXG`
+
+##### DID using alias
+
+`did:web:example.com:dids:alice`
+
+##### Email using public key
+
+`z6MkhvoSQhPDNwotybwX9o2scoSvkx5Syem3GiM9FV8h5YXG@example.com`
+
+##### Email using alias
+
+`alice@example.com`
+
+##### URI using public key
+
+`https://example.com/dids/z6MkhvoSQhPDNwotybwX9o2scoSvkx5Syem3GiM9FV8h5YXG/did.json`
+
+##### URI using alias
+
+`https://example.com/dids/alice/did.json`
+
+
+### Encoding
+
+Public keys should always be encoded as strings using 
+[URL Safe Base64 Encoding](https://www.rfc-editor.org/rfc/rfc4648).
+
 
 
 
@@ -139,6 +168,14 @@ an implementation detail.
 Unlike OAuth there is not client registration. Any http host that complies 
 with this specification should interoperate with any other. 
 
+## DNS Attack Prevention
+
+To protect against 
+[DNS attacks](https://w3c-ccg.github.io/did-method-web/#dns-security-considerations) 
+an additional response header containing a signature of the body is required 
+for all responses that don't return a signed response (like a JWT). 
+
+The signature must be from a key present in the current domain did document.
 
 
 ## Protocol Endpoints
@@ -154,31 +191,18 @@ Hosting DIDs require the host to respond to the following endpoints:
 
 ### Host DID Document Endpoint
 
-GET `https://${origin}/.well-known/did.json` 
+The host should have its own identity as a did document in accordance to the 
+[Well Known DID Configuration](https://identity.foundation/.
+well-known/resources/did-configuration/) spec.
+ 
+An HTTPS GET request to `https://${origin}/.well-known/did.json` should 
+return  valid DID Document including at least one signing keys pair.
 
-#### Request
-
-##### Params
-
-none
-
-#### Response 
-
-A valid DID Document including at least one signing keys pair.
-
-
+*response body signature header required*
 
 ### Identity DID Document Endpoint
 
 GET `https://${origin}/dids/${id}/did.json` 
-
-#### Request
-
-##### Params
-
-none
-
-#### Response 
 
 A valid DID Document including at least one signing keys pair.
 
@@ -190,15 +214,10 @@ Optional endpoint to support cross-domain authentication.
 
 POST `https://${origin}/dids/${id}/auth`
 
-#### Request
+#### Authentication
 
-##### Params
 
-none
 
-#### Response 
-
-A valid DID Document including at least one signing keys pair.
 
 
 
@@ -208,28 +227,97 @@ Optional endpoint to receive message for an identifier
 
 POST `https://${origin}/dids/${id}/inbox`
 
-#### Request
-
-##### Methods
-
-POST
-
-##### Params
-
-none
-
-##### Post Body
-
-#### Response 
-
-Any successful status code.
 
 
-## Identifiers
+## Authentication Flow
+
+### Roles
+
+
+#### User
+
+The human interacting with a device. 
+
+#### App
+
+The website or app the user is trying to signup with or signin to. 
+
+#### Identity Host
+
+The web application hosting the identifier the user is trying to use to signin.
+
+### Flow
+
+```mermaid
+sequenceDiagram
+  User->>+App: Step 1
+  App->>+IdHost: Step 2
+  IdHost->>-App: Step 3
+  App->>-User: Step 4
+```
+
+1. User visits a new app and gives them their did in email address form
+2. The app extracts the host from the email and checks if that host is a 
+   valid DID Web identity host by getting and validating:
+   * host did document from `https://${host}/.well-known/did.json`
+   * user did document from `https://${host}/dids/${username}/did.json`
+   * *what to do here if the host is invalid is outside the scope of this 
+     document but a fallback to a more classic form of authentication might 
+     be appropriate here.* 
+3. The app uses one of the 4 authentication strategies to request a session 
+   token.
+4. Success. The app can now use your session token to gain limited access to 
+   other api endpoints on your identity host.
+
+#### Authentication Strategies
+
+##### Magic Link
+
+*This strategy only possible if the destination app has a public http 
+endpoint*
+
+1. The app generates a one-time secret login token, embeds it into a url 
+   and post that to the Authentication endpoint
+2. The app then instructs the user to follow the link sent to their identity 
+   host
+
+
+##### Secret Code
+
+*This strategy the only strategy available to *
+
+1. The app generates a one-time secret login token, persists a copy of it, 
+   embeds it into a callback url and posts that url to the Authentication 
+   endpoint.
+2. The app then instructs the user to follow the link sent to their identity 
+   host
+3. The user follows the link sent to their identity host
+
+##### Redirect Dance
+
+*This strategy only possible if user is authenticating to a website in a 
+browser*
+
+1. The app redirects the user to their identity host's authentication 
+   endpoint using query params to define the scopes for the requested session
+2. the user is propmpted to confirm the details of the session request
+3. the user approves the session and is redirected back to the app
+
+
+##### Identity Host Prompt
+
+*this strategy requires that the identity host have a UX*
+
+4. The app requests 
+
+
+
 
 ## Credentials
 
 ### Granting a Credential
+
+TDB…
 
 ### Verifying a Credential
 
@@ -237,35 +325,6 @@ Credentials are revokable so verifying applications should request updated
 copies before granting access. 
 
 
-
---------
-
-enabling cross-domain authentication, and limited access to HTTP services on
-behalf of for
-
-a resource owner by generating verifiable credentials granting revocable access
-   between the resource owner and the 
-   third-party application to obtain access on its own behalf. 
-  
-
-
-http domains to host distributed identifiers that can be used on or by applications at domains
-The DID Web Authorization Framework enables http domains to host distributed identifiers that can be used on or by applications at domains
-
-any other domain to gain limited access to an HTTP service
-
-
-third-party application to obtain
-
-any http domain to
-
-
-https://w3c-ccg.github.io/did-method-web/
-
-
-
-
-## Federated Authentication
 
 
 
