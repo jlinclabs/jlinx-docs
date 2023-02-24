@@ -3,9 +3,8 @@
 ## Abstract
 
 The DID Web Authorization Framework expands upon the [did:web spec][did-web-spec] 
-enabling cross-domain authentication and limited access to HTTP services on 
-behalf. DIDs can issue verifiable credentials to grant revocable access to 
-third-party applications.
+enabling cross-domain authentication and the ability to grant and revokable 
+access to protected HTTP resources to other identities.
 
 [[table of contents here]]
 
@@ -28,8 +27,8 @@ authentication is [The NASCAR Problem](https://indieweb.org/NASCAR_problem).
 There is only so much room for "sign in with X" brands. 
 
 The DID Web Authorization Framework addresses these limitations by introducing 
-decentralized cooperative protocols that allow any domain to both host and use 
-identifiers and credentials cross-domain.
+decentralized cooperative protocols that allow any domain to both host and 
+consume cross-domain identifiers and credentials.
 
 Instead of authenticating in with an email and password, or with a major 
 centralized brand, users can authenticate using any valid identity hosted 
