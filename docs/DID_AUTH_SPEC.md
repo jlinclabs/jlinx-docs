@@ -52,18 +52,70 @@ This SPEC builds upon and inherits the terminology from the following spec:
 - Well Known DID Configuration - 
   https://identity.foundation/.well-known/resources/did-configuration/
 
+
+### Notational Conventions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   specification are to be interpreted as described in [RFC2119].
+
+   This specification uses the Augmented Backus-Naur Form (ABNF)
+   notation of [RFC5234].  Additionally, the rule URI-reference is
+   included from "Uniform Resource Identifier (URI): Generic Syntax"
+   [RFC3986].
+
+   Certain security-related terms are to be understood in the sense
+   defined in [RFC4949].  These terms include, but are not limited to,
+   "attack", "authentication", "authorization", "certificate",
+   "confidentiality", "credential", "encryption", "identity", "sign",
+   "signature", "trust", "validate", and "verify".
+
+   Unless otherwise noted, all the protocol parameter names and values
+   are case sensitive.
+
+
 ### Terms
 
 #### User
 
 The human interacting with a device.
 
-#### Identifier
+#### Hosted Identifier
 
-A [DID][did-spec], in [did:web][did-web-spec] form, at a unique resource 
-location, representing an individual human or organization
+A [DID][did-spec] hosted at a single http domain, using the [did:web method]
+[did-web-spec], representing an individual human, organization or app. It 
+can be granted revocable rights via verifiable credentials. It can also have 
+aliases.
 
-Can be granted revocable rights via verifiable credentials.
+#### Client
+
+Any application making protected resource requests on behalf of an 
+identifier. When a user signs into an application or website using an 
+identifier the app or website is the client.
+
+#### Identifier Host
+
+Any web application that complies with this spec qualifies as an Identifier
+Host.
+
+#### Credential
+
+see Verifiable Credentials
+
+#### Authorization Grant Token
+
+A one-time use token used to grant Client an access token
+
+#### Access Token
+
+A [JSON Web Token][jwt-spec] used to gain limited access to protected HTTP 
+resources.
+
+
+
+
+
+## Identifier Formats
 
 A hosted identifier is a [DID][did-spec] using the [did:web method]
 [did-web-spec] at a specific host domain. See the [did:web spec]
@@ -132,93 +184,12 @@ communicate with `example.com` as if it was a compliant identifier host.
 For more on this see
 [Validating Identifier Hosts](#validating-identifier-hosts)
 
-#### Client
 
-Any application making protected resource requests on behalf of an 
-identifier. When a user signs into an application or website using an 
-identifier the app or website is the client.
+## Hosting Identifiers
 
-#### Identifier Host
+Hosting 
 
-An http domain hosting [did:web][did-web-spec] [identifiers][did-spec]
-
-Any web application, hosted at a singular domain, that serves responses that 
-comply with this specification document, qualifies as an Identifier Host.
-
-#### Authorization Grant Token
-
-A one-time use token used to grant Client an access token
-
-#### Access Token
-
-A [JSON Web Token][jwt-spec] used to gain limited access to protected HTTP 
-resources.
-
-
-
-
-### Encoding
-
-Public keys should always be encoded as strings using 
-[URL Safe Base64 Encoding](https://www.rfc-editor.org/rfc/rfc4648).
-
-
-
-
-### TLS 
-
-Transport Layer Security is considered essential at all times. Using this 
-protocol over insecure connections is not recommended.
-
-
-### HTTP Redirections
-
-This specification makes extensive use of HTTP redirections, in which the 
-client or the authorization server directs the resource owner's user-agent 
-to another destination.  While the examples in this specification show the 
-use of the HTTP 302 status code, any other method available via the 
-user-agent to accomplish this redirection is allowed and is considered to be
-an implementation detail.
-
-
-
-### Notational Conventions
-
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   specification are to be interpreted as described in [RFC2119].
-
-   This specification uses the Augmented Backus-Naur Form (ABNF)
-   notation of [RFC5234].  Additionally, the rule URI-reference is
-   included from "Uniform Resource Identifier (URI): Generic Syntax"
-   [RFC3986].
-
-   Certain security-related terms are to be understood in the sense
-   defined in [RFC4949].  These terms include, but are not limited to,
-   "attack", "authentication", "authorization", "certificate",
-   "confidentiality", "credential", "encryption", "identity", "sign",
-   "signature", "trust", "validate", and "verify".
-
-   Unless otherwise noted, all the protocol parameter names and values
-   are case sensitive.
-
-
-### Client Registration
-
-Unlike OAuth there is not client registration. Any http domain that complies 
-with this specification should interoperate with any other. 
-
-## DNS Attack Prevention
-
-To protect against 
-[DNS attacks](https://w3c-ccg.github.io/did-method-web/#dns-security-considerations) 
-an additional response header containing a signature of the body is required 
-for all responses that don't return a signed response (like a JWT). 
-
-The signature must be from a key present in the current domain did document.
-
-
-## Protocol Endpoints
+### Protocol Endpoints
 
 Any HTTP domain can host [did:web][did-web-spec] [identifiers][did-spec].
 Hosting DIDs requires the host to respond to the following endpoints:
@@ -229,7 +200,7 @@ Hosting DIDs requires the host to respond to the following endpoints:
 - message endpoint
 
 
-### Host DID Document Endpoint
+#### Host DID Document Endpoint
 
 The host should have its own identifier as a did document in accordance to the 
 [Well Known DID Configuration](https://identity.foundation/.well-known/resources/did-configuration/) spec.
@@ -239,7 +210,7 @@ return  valid DID Document including at least one signing keys pair.
 
 *response body signature header required*
 
-### Identifier DID Document Endpoint
+#### Identifier DID Document Endpoint
 
 GET `https://${origin}/dids/${id}/did.json` 
 
@@ -247,7 +218,7 @@ A valid DID Document including at least one signing keys pair.
 
 
 
-### Authentication Endpoint
+#### Authentication Endpoint
 
 POST `https://${origin}/dids/${id}/auth`
 
@@ -281,11 +252,54 @@ For information on how to obtain an authorization grant token see the
 
 
 
-### Message Endpoint
+#### Message Endpoint
 
 Optional endpoint to receive message for an identifier
 
 POST `https://${origin}/dids/${id}/inbox`
+
+
+
+
+
+
+### Encoding
+
+Public keys should always be encoded as strings using 
+[URL Safe Base64 Encoding](https://www.rfc-editor.org/rfc/rfc4648).
+
+### TLS 
+
+Transport Layer Security is considered essential at all times. Using this 
+protocol over insecure connections is not recommended.
+
+
+### HTTP Redirections
+
+This specification makes extensive use of HTTP redirections, in which the 
+client or the authorization server directs the resource owner's user-agent 
+to another destination.  While the examples in this specification show the 
+use of the HTTP 302 status code, any other method available via the 
+user-agent to accomplish this redirection is allowed and is considered to be
+an implementation detail.
+
+
+
+
+### Client Registration
+
+Unlike OAuth there is not client registration. Any http domain that complies 
+with this specification should interoperate with any other. 
+
+## DNS Attack Prevention
+
+To protect against 
+[DNS attacks](https://w3c-ccg.github.io/did-method-web/#dns-security-considerations) 
+an additional response header containing a signature of the body is required 
+for all responses that don't return a signed response (like a JWT). 
+
+The signature must be from a key present in the current domain did document.
+
 
 
 
