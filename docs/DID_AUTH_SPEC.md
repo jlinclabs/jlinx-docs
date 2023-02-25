@@ -31,7 +31,7 @@ decentralized cooperative protocols that allow any domain to both host and
 consume cross-domain identifiers and credentials.
 
 Instead of authenticating in with an email and password, or with a major 
-centralized brand, users can authenticate using any valid identity hosted 
+centralized brand, users can authenticate using any valid identifier hosted 
 at any domain. 
 
 This specification is designed for use with HTTP ([RFC2616][http-spec]). The 
@@ -39,47 +39,40 @@ use of The DID Web Authorization Framework over any protocol other than HTTP
 is out of scope.
 
 
+### Terms
 
-### Roles
+#### User
 
-- Identifier host
-  - An http domain hosting [did:web][did-web-spec] [identifiers][did-spec]
+The human interacting with a device.
 
-- Identifier
-   - A unique resource representing an individual human or organization
-   - Can be granted revocable rights via verifiable credentials
+#### Identifier
 
-- Client
-  - An application making protected resource requests on behalf of an 
-    individual human or organization using one unique identifier and one or 
-    more credentials.
+A [DID][did-spec], in [did:web][did-web-spec] form, at a unique resource 
+location, representing an individual human or organization
 
+Can be granted revocable rights via verifiable credentials.
 
------
+#### Client
 
-### Protocol Flow
+Any application making protected resource requests on behalf of an 
+identifier. When a user signs into an application or website using an 
+identifier the app or website is the client.
 
+#### Identifier Host
 
+An http domain hosting [did:web][did-web-spec] [identifiers][did-spec]
 
-```
-Alice visits app1.com
-Alice registers a new identity alice@app1.com
-Alice visits app2.com
-Alice authenticates with alice@app1.com
-app2 requests HTTP GET https://app1.com/.well-known/did.json (cachable)
-app2 requests HTTP GET https://app1.com/dids/alice/did.json (latest)
-app2 requests HTTP GET https://app1.com/dids/alice/auth
-depending on the response from app1, app2 chooses a compatible 
-authenticaiton method
-(we could do a one-time-code here)
-Alice is redirected to https://app1
-```
+Any web application, hosted at a singular domain, that serves responses that 
+comply with this specification document, qualifies as an Identifier Host.
 
-## Authentication Methods
+#### Authorization Grant Token
 
-- messaged a one-time-code
-- messaged a magic link
-- http redirect dance
+A one-time use token used to grant Client an access token
+
+#### Access Token
+
+A [JSON Web Token][jwt-spec] used to gain limited access to protected HTTP 
+resources.
 
 
 
@@ -181,17 +174,17 @@ The signature must be from a key present in the current domain did document.
 ## Protocol Endpoints
 
 Any HTTP domain can host [did:web][did-web-spec] [identifiers][did-spec].
-Hosting DIDs require the host to respond to the following endpoints:
+Hosting DIDs requires the host to respond to the following endpoints:
 
 - host did document endpoint
-- identity did document endpoint
+- identifier did document endpoint
 - authentication endpoint
 - message endpoint
 
 
 ### Host DID Document Endpoint
 
-The host should have its own identity as a did document in accordance to the 
+The host should have its own identifier as a did document in accordance to the 
 [Well Known DID Configuration](https://identity.foundation/.
 well-known/resources/did-configuration/) spec.
  
@@ -200,7 +193,7 @@ return  valid DID Document including at least one signing keys pair.
 
 *response body signature header required*
 
-### Identity DID Document Endpoint
+### Identifier DID Document Endpoint
 
 GET `https://${origin}/dids/${id}/did.json` 
 
@@ -210,12 +203,33 @@ A valid DID Document including at least one signing keys pair.
 
 ### Authentication Endpoint
 
-Optional endpoint to support cross-domain authentication.
-
 POST `https://${origin}/dids/${id}/auth`
 
-#### Authentication
+This endpoint takes a one-time authorization grant token and, if valid, 
+returns a access token. The access token is verifiable 
+[JSON Web Token][jwt-spec]. Applications should validate this JWT keep it a 
+secret. 
 
+
+Example post body:
+
+```json
+{
+  "authToken": "d58c27ba1de705af6a41e54d7bacfdad9f74dee7"
+}
+```
+
+example response body:
+
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+  eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+}
+```
+
+For information on how to obtain an authorization grant token see the
+[Authentication Flow](#authentication-flow). 
 
 
 
@@ -231,22 +245,15 @@ POST `https://${origin}/dids/${id}/inbox`
 
 ## Authentication Flow
 
-### Roles
-
-
-#### User
-
-The human interacting with a device. 
-
-#### App
-
-The website or app the user is trying to signup with or signin to. 
-
-#### Identity Host
-
-The web application hosting the identifier the user is trying to use to signin.
+[[see roles]]
 
 ### Flow
+
+#### Roles
+
+ - User - a human logging in
+ - IdHost - the website that hosts the identifier being used to authenticate
+ - App - the website being logged into
 
 ```mermaid
 sequenceDiagram
@@ -258,7 +265,7 @@ sequenceDiagram
 
 1. User visits a new app and gives them their did in email address form
 2. The app extracts the host from the email and checks if that host is a 
-   valid DID Web identity host by getting and validating:
+   valid DID Web identifier host by getting and validating:
    * host did document from `https://${host}/.well-known/did.json`
    * user did document from `https://${host}/dids/${username}/did.json`
    * *what to do here if the host is invalid is outside the scope of this 
@@ -267,7 +274,7 @@ sequenceDiagram
 3. The app uses one of the 4 authentication strategies to request a session 
    token.
 4. Success. The app can now use your session token to gain limited access to 
-   other api endpoints on your identity host.
+   other api endpoints on your identifier host.
 
 #### Authentication Strategies
 
@@ -278,7 +285,7 @@ endpoint*
 
 1. The app generates a one-time secret login token, embeds it into a url 
    and post that to the Authentication endpoint
-2. The app then instructs the user to follow the link sent to their identity 
+2. The app then instructs the user to follow the link sent to their identifier 
    host
 
 
@@ -289,24 +296,24 @@ endpoint*
 1. The app generates a one-time secret login token, persists a copy of it, 
    embeds it into a callback url and posts that url to the Authentication 
    endpoint.
-2. The app then instructs the user to follow the link sent to their identity 
+2. The app then instructs the user to follow the link sent to their identifier 
    host
-3. The user follows the link sent to their identity host
+3. The user follows the link sent to their identifier host
 
 ##### Redirect Dance
 
 *This strategy only possible if user is authenticating to a website in a 
 browser*
 
-1. The app redirects the user to their identity host's authentication 
+1. The app redirects the user to their identifier host's authentication 
    endpoint using query params to define the scopes for the requested session
 2. the user is propmpted to confirm the details of the session request
 3. the user approves the session and is redirected back to the app
 
 
-##### Identity Host Prompt
+##### Identifier Host Prompt
 
-*this strategy requires that the identity host have a UX*
+*this strategy requires that the identifier host have a UX*
 
 4. The app requests 
 
@@ -334,3 +341,4 @@ copies before granting access.
 [did-spec]: https://www.w3.org/TR/did-core/
 [did-web-spec]: https://w3c-ccg.github.io/did-method-web/
 [oauth-2-spec]: https://www.rfc-editor.org/rfc/rfc6749#section-1.1
+[jwt-spec]: https://www.rfc-editor.org/rfc/rfc7519
