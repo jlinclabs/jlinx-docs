@@ -122,11 +122,11 @@ alice@example.com
 Using an email address format allows for a backward compatability feel when 
 using a unique identifier to authenticate into applications on the web. 
 
-Applications wanting to support authentication via  DID Web Authorization 
-Framework should detect if a provided email address represents a decentralized identifier.
-
-When alice provides `alice@example.com` as her unique identifier, the client 
-applications should assume `did:web:example.com:dids:alice` and attempt to 
+Applications wanting to support authentication via The DID Web Authorization 
+Framework should detect if a provided email address represents a 
+decentralized identifier. For example when user provides
+`alice@example.com` as their login, the client applications should 
+assume it could represent `did:web:example.com:dids:alice` and attempt to 
 communicate with `example.com` as if it was a compliant identifier host.
 
 For more on this see
@@ -232,8 +232,7 @@ Hosting DIDs requires the host to respond to the following endpoints:
 ### Host DID Document Endpoint
 
 The host should have its own identifier as a did document in accordance to the 
-[Well Known DID Configuration](https://identity.foundation/.
-well-known/resources/did-configuration/) spec.
+[Well Known DID Configuration](https://identity.foundation/.well-known/resources/did-configuration/) spec.
  
 An HTTPS GET request to `https://${origin}/.well-known/did.json` should 
 return  valid DID Document including at least one signing keys pair.
