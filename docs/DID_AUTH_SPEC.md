@@ -100,7 +100,7 @@ https://example.com/dids/alice/did.json
 Aliases allow for identifiers that are both more readable and shorter than 
 an encoded public key. Aliases do not need to be universally unique themselves, 
 only universally unique when paired with the http domain. Aliases 
-must be a valid [SMTP local-part][smpt-spec] and cannot contain the characters 
+must be a valid [SMTP local-part][smtp-spec] and cannot contain the characters 
 `:` or `/`.
 
 Alias must also be present in the DID Document. *NOTE: this requirement need 
@@ -397,6 +397,7 @@ copies before granting access.
 
 
 [http-spec]: https://www.rfc-editor.org/rfc/rfc2616
+[smtp-spec]: https://www.rfc-editor.org/rfc/rfc821
 [did-spec]: https://www.w3.org/TR/did-core/
 [did-web-spec]: https://w3c-ccg.github.io/did-method-web/
 [oauth-2-spec]: https://www.rfc-editor.org/rfc/rfc6749#section-1.1
