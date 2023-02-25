@@ -84,8 +84,8 @@ A hosted identifier can be presented in several formats:
 `alice@example.com`
 
 
-Identifiers are resolved according to the [did:web SPEC]
-[did-web-spec]. According to the spec the above examples resolve to the urls:
+Identifiers are resolved according to the [did:web SPEC][did-web-spec]. 
+According to the spec the above examples resolve to the following urls:
 
 ```
 did:web:example.com:dids:z6MkhvoSQhPDNwotybwX9o2scoSvkx5Syem3GiM9FV8h5YXG
