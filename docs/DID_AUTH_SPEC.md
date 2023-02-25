@@ -38,6 +38,19 @@ This specification is designed for use with HTTP ([RFC2616][http-spec]). The
 use of The DID Web Authorization Framework over any protocol other than HTTP 
 is out of scope.
 
+### Specs
+
+This SPEC builds upon and inherits the terminology from the following spec:
+
+- HTTP - https://www.rfc-editor.org/rfc/rfc2616
+- SMPT - https://www.rfc-editor.org/rfc/rfc2821
+- DID - https://www.w3.org/TR/did-core/
+- DID Web - https://w3c-ccg.github.io/did-method-web/
+- JWT - https://www.rfc-editor.org/rfc/rfc7519
+- Verifiable Credentials Data Model v1.1 -
+  https://www.w3.org/TR/vc-data-model/
+- Well Known DID Configuration - 
+  https://identity.foundation/.well-known/resources/did-configuration/
 
 ### Terms
 
@@ -51,6 +64,73 @@ A [DID][did-spec], in [did:web][did-web-spec] form, at a unique resource
 location, representing an individual human or organization
 
 Can be granted revocable rights via verifiable credentials.
+
+A hosted identifier is a [DID][did-spec] using the [did:web method]
+[did-web-spec] at a specific host domain. See the [did:web spec]
+[did-web-spec] for details on formatting and encoding.
+
+A hosted identifier can be presented in several formats:
+
+##### DID Web
+
+`did:web:example.com:dids:z6MkhvoSQhPDNwotybwX9o2scoSvkx5Syem3GiM9FV8h5YXG`
+
+##### DID Web via alias
+
+`did:web:example.com:dids:alice`
+
+##### Email via alias
+
+`alice@example.com`
+
+
+Identifiers are resolved according to the [did:web SPEC]
+[did-web-spec]. According to the spec the above examples resolve to the urls:
+
+```
+did:web:example.com:dids:z6MkhvoSQhPDNwotybwX9o2scoSvkx5Syem3GiM9FV8h5YXG
+https://example.com/dids/z6MkhvoSQhPDNwotybwX9o2scoSvkx5Syem3GiM9FV8h5YXG/did.json
+
+did:web:example.com:dids:alice
+https://example.com/dids/alice/did.json
+```
+
+##### Aliases
+
+Aliases allow for identifiers that are both more readable and shorter than 
+an encoded public key. Aliases do not need to be universally unique themselves, 
+only universally unique when paired with the http domain. Aliases 
+must be a valid [SMTP local-part][smpt-spec] and cannot contain the characters 
+`:` or `/`.
+
+Alias must also be present in the DID Document. *NOTE: this requirement need 
+more specification*
+
+
+##### Email Address Form
+
+An alternate, more familiar feeling, format.  
+
+```
+# Email
+z6MkhvoSQhPDNwotybwX9o2scoSvkx5Syem3GiM9FV8h5YXG@example.com
+
+# Email using an alias
+alice@example.com
+```
+
+Using an email address format allows for a backward compatability feel when 
+using a unique identifier to authenticate into applications on the web. 
+
+Applications wanting to support authentication via  DID Web Authorization 
+Framework should detect if a provided email address represents a decentralized identifier.
+
+When alice provides `alice@example.com` as her unique identifier, the client 
+applications should assume `did:web:example.com:dids:alice` and attempt to 
+communicate with `example.com` as if it was a compliant identifier host.
+
+For more on this see
+[Validating Identifier Hosts](#validating-identifier-hosts)
 
 #### Client
 
@@ -75,39 +155,6 @@ A [JSON Web Token][jwt-spec] used to gain limited access to protected HTTP
 resources.
 
 
-
-## Hosted Identifiers
-
-A hosted identifier is a [DID][did-spec] using the [did:web method]
-[did-web-spec] at a specific host domain. See the [did:web spec]
-[did-web-spec] for details on formatting and encoding.
-
-A hosted identifier can be presented in several formats:
-
-
-##### DID using public key
-
-`did:web:example.com:dids:z6MkhvoSQhPDNwotybwX9o2scoSvkx5Syem3GiM9FV8h5YXG`
-
-##### DID using alias
-
-`did:web:example.com:dids:alice`
-
-##### Email using public key
-
-`z6MkhvoSQhPDNwotybwX9o2scoSvkx5Syem3GiM9FV8h5YXG@example.com`
-
-##### Email using alias
-
-`alice@example.com`
-
-##### URI using public key
-
-`https://example.com/dids/z6MkhvoSQhPDNwotybwX9o2scoSvkx5Syem3GiM9FV8h5YXG/did.json`
-
-##### URI using alias
-
-`https://example.com/dids/alice/did.json`
 
 
 ### Encoding
@@ -158,7 +205,7 @@ an implementation detail.
 
 ### Client Registration
 
-Unlike OAuth there is not client registration. Any http host that complies 
+Unlike OAuth there is not client registration. Any http domain that complies 
 with this specification should interoperate with any other. 
 
 ## DNS Attack Prevention
@@ -320,6 +367,18 @@ browser*
 
 
 
+
+
+## Validating Identifier Hosts
+
+Client applications should allow authentication via any valid identifier 
+host. When a client application is given an identifier it should attempt to 
+communicate with the http host as if it complied with this spec.
+
+
+*TODO: add a link to a set of free tools to help test your domains compliance*
+
+
 ## Credentials
 
 ### Granting a Credential
@@ -342,3 +401,6 @@ copies before granting access.
 [did-web-spec]: https://w3c-ccg.github.io/did-method-web/
 [oauth-2-spec]: https://www.rfc-editor.org/rfc/rfc6749#section-1.1
 [jwt-spec]: https://www.rfc-editor.org/rfc/rfc7519
+[vc-data-model]: https://www.w3.org/TR/vc-data-model/
+[well-known-did-configuration]: https://identity.foundation/.well-known/resources/did-configuration/
+[did-configuration-resource]: https://identity.foundation/. well-known/resources/did-configuration/#DIDConfigurationResource
